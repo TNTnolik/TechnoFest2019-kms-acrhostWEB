@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="auth">
+    {% if form.errors %}
+      <p class="error">Ваше имя пользователя или пароль не совпадают. Проверти правильность введённых данных.</p>
+    {% endif %}
+
+    {% if next %}
+      {% if user.is_authenticated %}
+        <p class="error">Нет доступа к странице.</p>
+      {% else %}
+        <p>Пожалуйста авторизуйтесь.</p>
+      {% endif %}
+    {% endif %}
+
+    <form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+        <ul>
+            <li><span>Авторизация</span></li>
+            <li>{{ form.username }}</li>
+            <li>{{ form.password }}</li>
+        </ul>
+
+
+    <input type="submit" value="Войти" />
+    <input type="hidden" name="next" value="{{ next }}" />
+    </form>
+    <a href="{% url 'password_reset' %}">Забыли пароль?</a>
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+        <div class="content">
+                <div>
+                Дата
+                </div>
+                <div>
+                Влажность
+                </div>
+                <div>
+                Статус
+                </div>
+                <div>
+                Температура
+                </div>
+                
+        </div>
+        <div class="content">
+                {% for arrow in arrows %}
+        	<div>
+        	{{arrow.date}}
+        	</div>
+        	<div>
+        	{{arrow.humidity}} %
+        	</div>
+                <div>
+                        {% if arrow.height == 1 %}
+                Не готова
+                {% else %}
+                 Готова       
+                {% endif %}
+                </div>
+                <div>
+                {{arrow.temperature}} C
+                </div>
+                {% endfor %}
+        </div>
+
+{% endblock %}
